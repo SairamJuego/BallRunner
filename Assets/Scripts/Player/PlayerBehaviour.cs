@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BR.Collectables;
 
 namespace BR.Player
 {
@@ -21,6 +22,9 @@ namespace BR.Player
 
         [SerializeField] private GameObject _particleOnDeath;
 
+        private AudioSource _coinSound;
+        
+
         
 
         #endregion
@@ -29,12 +33,13 @@ namespace BR.Player
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            _coinSound = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(coinCollected);
+            
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
                 rb.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
@@ -74,6 +79,7 @@ namespace BR.Player
         {
             if(other.gameObject.CompareTag("Coin"))
             {
+                _coinSound.Play();
                 coinCollected --;
                 other.gameObject.SetActive(false);
             }
