@@ -36,11 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/Scripts/Player/PlayerBehaviour.cs" />
-     <Compile Include="Assets/Scripts/Player/CamFollow.cs" />
-     <Compile Include="Assets/Scripts/GameManager/GameManager.cs" />
-     <Compile Include="Assets/Scripts/Collectables/CoinCollectable.cs" />
+     <Compile Include="Assets/Scripts/Player/PlayerDeath.cs" />
+     <Compile Include="Assets/Scripts/GameCondition/GameCondition.cs" />
+     <Compile Include="Assets/Scripts/Coin/CoinRotation.cs" />
      <Compile Include="Assets/Scripts/UI/UIManager.cs" />
+     <Compile Include="Assets/Scripts/Player/PlayerMove.cs" />
+     <Compile Include="Assets/Scripts/Player/PlayerCoinHitChecker.cs" />
+     <Compile Include="Assets/Scripts/Camera/CamFollow.cs" />
+     <Compile Include="Assets/Scripts/SceneController/SceneController.cs" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />

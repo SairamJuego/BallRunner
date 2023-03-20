@@ -2,21 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using BR.Player;
 
 namespace BR.UI
 {
     public class UIManager : MonoBehaviour
     {
+        public delegate void UpdateCoinDelegate();
+
+        public static UpdateCoinDelegate UpdateCoinDele ; 
         [SerializeField] private TextMeshProUGUI _coinScore;
 
         [SerializeField] private GameObject _gameOverMenu;
 
         [SerializeField] private GameObject _gameWinMenu;
+
         
 
-        public void UpdateCoinScore(int coin)
+        void OnEnable()
         {
-            _coinScore.text = "Coins to collect = " + coin;
+            UpdateCoinDele += UpdateCoinScore;
+        }
+
+        void OnDisable() {
+            UpdateCoinDele -= UpdateCoinScore;
+        }
+        
+
+        public void  UpdateCoinScore()
+        {
+            _coinScore.text = "Coin collected = " + PlayerCoinHitChecker.coinCollected.ToString();
         }
 
         public void ActivateGameover()

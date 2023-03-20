@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BR.Collectables
+namespace BR.Coin
 {
-    public class CoinCollectable : MonoBehaviour
+    public class CoinRotation : MonoBehaviour
     {
         [SerializeField] private float _rotateSpeed;
 

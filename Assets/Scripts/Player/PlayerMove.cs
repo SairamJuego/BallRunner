@@ -1,48 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BR.Collectables;
+
 
 namespace BR.Player
 {
-    public class PlayerBehaviour : MonoBehaviour
+    public class PlayerMove : MonoBehaviour
     {
         #region Variables
-        //static 
-        public int coinCollected;
-
         //private variables
-        Rigidbody rb;
-        //Vector3 move = Vector3.zero;
+        private Rigidbody _rigidbody;
         private bool _isGrounded = false;
 
         //private serializable variables
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpSpeed;
 
-        [SerializeField] private GameObject _particleOnDeath;
-
-        private AudioSource _coinSound;
-        
-
-        
-
         #endregion
+
 
         // Start is called before the first frame update
         void Start()
         {
-            rb = GetComponent<Rigidbody>();
-            _coinSound = GetComponent<AudioSource>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+            //for activating jump
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
-                rb.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
+                _rigidbody.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
                 _isGrounded = false;
             }
         }
@@ -50,22 +39,18 @@ namespace BR.Player
         void FixedUpdate()
         {
             //for moving
-            rb.AddForce(Movement() * _moveSpeed * Time.deltaTime, ForceMode.Impulse);
+            _rigidbody.AddForce(Movement() * _moveSpeed * Time.deltaTime, ForceMode.Impulse);
         }
 
-        Vector3 Movement()
+        //gives direction for the force to move
+        private Vector3 Movement()
         {
             return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         }
 
-        public void PlayerOnDeath()
-        {
-            this.gameObject.SetActive(false);
-            Instantiate(_particleOnDeath,transform.position,Quaternion.identity);
-        }
+        #region Unity Events
 
-
-#region Collision and Trigger
+        //to check if the player is grounded
         void OnCollisionStay(Collision collisionInfo)
         {
             _isGrounded = true;   
@@ -75,19 +60,9 @@ namespace BR.Player
             _isGrounded = false;
         }
 
-        void OnTriggerEnter(Collider other)
-        {
-            if(other.gameObject.CompareTag("Coin"))
-            {
-                _coinSound.Play();
-                coinCollected --;
-                other.gameObject.SetActive(false);
-            }
-        }
-
         #endregion
-        
     }
     
 
 }
+

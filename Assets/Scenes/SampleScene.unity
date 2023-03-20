@@ -1342,8 +1342,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74a489b1cd134ac18dd5b3e9223d264, type: 3}
+  m_Script: {fileID: 11500000, guid: 965cc3f2cd1be46cbae2208f9f6d576e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 1067910978}
@@ -2176,9 +2176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216ebb926c4824f8ead6bad6b93b2265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1067910979}
-  _uIManager: {fileID: 1572095453}
-  _coinsToCollect: 25
 --- !u!4 &1062101893
 Transform:
   m_ObjectHideFlags: 0
@@ -2207,8 +2204,10 @@ GameObject:
   - component: {fileID: 1067910976}
   - component: {fileID: 1067910975}
   - component: {fileID: 1067910980}
-  - component: {fileID: 1067910979}
   - component: {fileID: 1067910981}
+  - component: {fileID: 1067910984}
+  - component: {fileID: 1067910983}
+  - component: {fileID: 1067910982}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2294,22 +2293,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1067910979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067910974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd4da1b1fd0048aaae4c01934636146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinCollected: 0
-  _moveSpeed: 10
-  _jumpSpeed: 5
-  _particleOnDeath: {fileID: 8351720215100812547, guid: 783505ad7a1e149d38ea3e780d1dad48, type: 3}
 --- !u!54 &1067910980
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2422,6 +2405,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1067910982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067910974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938f57a7df7f54a3ab392d32fe8b3208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 10
+  _jumpSpeed: 5
+--- !u!114 &1067910983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067910974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd4da1b1fd0048aaae4c01934636146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleOnDeath: {fileID: 8351720215100812547, guid: 783505ad7a1e149d38ea3e780d1dad48, type: 3}
+--- !u!114 &1067910984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067910974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f9dcd203ac243a0a75587a4775443b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1098674418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1174988024862608016, guid: a90399f2457b848d9af26bb92227b753, type: 3}
