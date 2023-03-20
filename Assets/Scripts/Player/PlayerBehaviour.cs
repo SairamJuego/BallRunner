@@ -7,6 +7,9 @@ namespace BR.Player
     public class PlayerBehaviour : MonoBehaviour
     {
         #region Variables
+        //static 
+        public int coinCollected;
+
         //private variables
         Rigidbody rb;
         //Vector3 move = Vector3.zero;
@@ -15,6 +18,8 @@ namespace BR.Player
         //private serializable variables
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpSpeed;
+
+        [SerializeField] private GameObject _particleOnDeath;
 
         
 
@@ -29,7 +34,7 @@ namespace BR.Player
         // Update is called once per frame
         void Update()
         {
-            
+            Debug.Log(coinCollected);
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
                 rb.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
@@ -48,7 +53,15 @@ namespace BR.Player
             return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         }
 
-        void OnCollisionEnter(Collision collisionInfo)
+        public void PlayerOnDeath()
+        {
+            this.gameObject.SetActive(false);
+            Instantiate(_particleOnDeath,transform.position,Quaternion.identity);
+        }
+
+
+#region Collision and Trigger
+        void OnCollisionStay(Collision collisionInfo)
         {
             _isGrounded = true;   
         }
@@ -57,8 +70,18 @@ namespace BR.Player
             _isGrounded = false;
         }
 
-        
+        void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.CompareTag("Coin"))
+            {
+                coinCollected --;
+                other.gameObject.SetActive(false);
+            }
+        }
+
+        #endregion
         
     }
+    
 
 }
