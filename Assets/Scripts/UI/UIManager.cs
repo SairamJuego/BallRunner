@@ -16,7 +16,7 @@ namespace BR.UI
 
         public void UpdateCoinScore(int coin)
         {
-            _coinScore.text = "Coin Collected = " + coin;
+            _coinScore.text = "Coins to collect = " + coin;
         }
 
         public void ActivateGameover()
