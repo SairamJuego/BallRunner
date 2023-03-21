@@ -8,7 +8,7 @@ namespace BR.Player
     public class PlayerCoinHitChecker : MonoBehaviour
     {
         
-        //public variable
+        //public variable to store the hit coin number
         public static int coinCollected;
 
         //private variable
@@ -31,4 +31,5 @@ namespace BR.Player
             }
         }
     }
+
 }

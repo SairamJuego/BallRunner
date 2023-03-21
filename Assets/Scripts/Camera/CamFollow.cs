@@ -12,6 +12,10 @@ namespace BR.Player
         // Start is called before the first frame update
         void Start()
         {
+            if(_playerTransform == null)
+            {
+                _playerTransform = FindAnyObjectByType<PlayerMove>().gameObject.transform;
+            }
             _camOffset = this.transform.position - _playerTransform.position;
         }
 

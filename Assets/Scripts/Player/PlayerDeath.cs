@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BR.UI;
 
 
 namespace BR.Player
@@ -10,11 +11,9 @@ namespace BR.Player
         //private variables
         [SerializeField] private GameObject _particleOnDeath;
 
-        public static bool isPlayerDead{get;private set;}
-
-
         void Update()
         {
+            //to check if the player has fallen down if yes then call death function
             if(transform.position.y < -15f && this.gameObject.activeInHierarchy)
             {
                 PlayerOnDeath();  
@@ -23,9 +22,9 @@ namespace BR.Player
 
         public void PlayerOnDeath()
         {
-            isPlayerDead = true;
             this.gameObject.SetActive(false);
             Instantiate(_particleOnDeath, transform.position, Quaternion.identity);
+            UIManager.UpdateGameOverDele?.Invoke();
         }
     }
 }
