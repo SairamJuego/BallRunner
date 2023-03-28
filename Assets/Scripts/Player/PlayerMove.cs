@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 namespace BR.Player
@@ -12,12 +13,34 @@ namespace BR.Player
         private Rigidbody _rigidbody;
         private bool _isGrounded = false;
 
+        private Vector2 _move;
+
         //private serializable variables
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpSpeed;
 
+        //input system variable
+        private Playerinput _playerInput;
+
         #endregion
 
+        void Awake()
+        {
+            _playerInput = new Playerinput();
+        }
+        void OnEnable()
+        {
+            
+            _playerInput.Enable();
+            _playerInput.OnFoot.Jump.performed += ctx => Jump();
+            
+        }
+        
+        void OnDisable()
+        {
+            _playerInput.Disable();
+            _playerInput.OnFoot.Jump.performed -= ctx => Jump();
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -28,12 +51,7 @@ namespace BR.Player
         // Update is called once per frame
         void Update()
         {
-            //for activating jump
-            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            {
-                _rigidbody.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
-                _isGrounded = false;
-            }
+            
         }
 
         void FixedUpdate()
@@ -45,7 +63,18 @@ namespace BR.Player
         //gives direction for the force to move
         private Vector3 Movement()
         {
-            return new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _move = new Vector2(_playerInput.OnFoot.Movement.ReadValue<Vector2>().x,_playerInput.OnFoot.Movement.ReadValue<Vector2>().y);
+            return new Vector3(_move.x, 0, _move.y);
+        }
+
+        //for activating jump
+        private void Jump()
+        {
+            if (_isGrounded)
+            {
+                _rigidbody.AddForce(Vector3.up * _jumpSpeed , ForceMode.Impulse);
+                _isGrounded = false;
+            }
         }
 
         #region Unity Events
